@@ -20,6 +20,7 @@ default: &default
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: dh # role previously added
   password: <%= ENV['DATABASE_PASSWORD'] %> # variable previously added  
+  url: <%= ENV["DATABASE_URL"] %>
 
 
 development:
