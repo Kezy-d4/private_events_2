@@ -8,3 +8,11 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ /* * {
+  margin: 0;
+ } */
+
+ header {
+  border-bottom: 1px solid black;
+ }
