@@ -1,0 +1,37 @@
+<h2>Create an event</h2>
+
+<%= form_with model: @event do |form| %>
+  <p>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </p>
+
+  <p>
+    <%= form.label :location %>
+    <%= form.text_field :location %>
+  </p>
+
+  <p>
+    <%= form.label :max_attendees %>
+    <%= form.number :max_attendees %>
+  </p>
+
+  <p>
+    <%= form.label :start_time %>
+    <%= form.datetime_local_field :start_time %>
+  </p>
+
+  <p>
+    <%= form.label :end_time %>
+    <%= form.datetime_local_field :end_time %>
+  </p>
+
+  <p>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </p>  
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

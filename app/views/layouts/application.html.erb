@@ -31,6 +31,10 @@
       </p>
 
       <p>
+        <%= link_to "Create an event", new_event_path %>
+      </p>
+
+      <p>
         <% if user_signed_in? %>
           <%= link_to "My profile", user_path(current_user.id) %>
         <% end %>
