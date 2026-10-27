@@ -1,0 +1,5 @@
+<h2>
+  <%= @event.title %> by <%= link_to @event.creator.name, user_path(@event) %>
+</h2>
+
+<%= debug @event %>

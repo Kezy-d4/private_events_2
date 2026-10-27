@@ -2,7 +2,9 @@
 <ul>
   <% @events.each do |event| %>
     <li>
-      <h3><%= event.title %></h3>
+      <h3>
+        <%= link_to event.to_s, event_path(event) %>
+      </h3>
     </li>
   <% end %>
 </ul>
