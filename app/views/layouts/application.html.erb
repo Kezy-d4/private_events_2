@@ -29,6 +29,13 @@
       <p>
         <%= link_to "Browse events", root_path %>
       </p>
+
+      <p>
+        <% if user_signed_in? %>
+          <%= link_to "My profile", user_path(current_user.id) %>
+        <% end %>
+      </p>
+
       <p>
         <% if user_signed_in? %>
           <%= 
