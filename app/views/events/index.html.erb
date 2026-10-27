@@ -1,1 +1,8 @@
 <h2>Browse events</h2>
+<ul>
+  <% @events.each do |event| %>
+    <li>
+      <h3><%= event.title %></h3>
+    </li>
+  <% end %>
+</ul>
