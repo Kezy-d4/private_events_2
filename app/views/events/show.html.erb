@@ -16,4 +16,11 @@
   <% end %>
 <% end %>
 
+<h3>Event attendees</h3>
+<ul>
+  <% @event.event_attendees.each do |event_attendee| %>
+    <li><%= link_to event_attendee.name, user_path(event_attendee) %></li>
+  <% end %>
+</ul>
+
 <%= debug @event %>
