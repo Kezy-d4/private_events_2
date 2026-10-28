@@ -1,5 +1,5 @@
 <h2>
-  <%= @event.title %> by <%= link_to @event.creator.name, user_path(@event) %>
+  <%= @event.title %> by <%= link_to @event.creator.name, user_path(@event.creator.id) %>
 </h2>
 
 <%= form_with url: event_attendances_path, scope: :event_attendance do |form| %>
