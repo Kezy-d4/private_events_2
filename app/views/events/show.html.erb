@@ -2,4 +2,18 @@
   <%= @event.title %> by <%= link_to @event.creator.name, user_path(@event) %>
 </h2>
 
+<%= form_with url: event_attendances_path, scope: :event_attendance do |form| %>
+  <%= form.hidden_field :attended_event_id, value: @event.id %>
+
+  <% if user_signed_in? %>
+    <%= form.hidden_field :event_attendee_id, value: current_user.id %>
+  <% end %>
+
+  <% if user_signed_in? && EventAttendance.user_attending?(@event.id, current_user.id) %>
+    <%= form.submit "Attend event", disabled: true %>
+  <% else %>
+    <%= form.submit "Attend event" %>
+  <% end %>
+<% end %>
+
 <%= debug @event %>
