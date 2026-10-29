@@ -9,10 +9,10 @@ class User < ApplicationRecord
   has_many :attended_events, through: :event_attendances, source: :attended_event
 
   def upcoming_events
-    attended_events.select { |a_e| Time.now.utc < a_e.time.utc }
+    attended_events.select { |a_e| Time.now.utc < a_e.start_date_and_time.utc }
   end
 
   def past_events
-    attended_events.select { |a_e| Time.now.utc >= a_e.time.utc }
+    attended_events.select { |a_e| Time.now.utc >= a_e.start_date_and_time.utc }
   end
 end

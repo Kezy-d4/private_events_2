@@ -3,17 +3,17 @@
 <%= form_with model: @event do |form| %>
   <p>
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, autofocus: true %>
   </p>
+
+  <p>
+    <%= form.label :start_date_and_time %>
+    <%= form.datetime_local_field :start_date_and_time %>
+  </p>  
 
   <p>
     <%= form.label :location %>
     <%= form.text_field :location %>
-  </p>
-
-  <p>
-    <%= form.label :time %>
-    <%= form.datetime_local_field :time %>
   </p>
 
   <p>
