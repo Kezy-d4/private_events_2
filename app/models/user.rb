@@ -7,12 +7,6 @@ class User < ApplicationRecord
   has_many :created_events, foreign_key: :creator_id, class_name: "Event"
   has_many :event_attendances, foreign_key: :event_attendee
   has_many :attended_events, through: :event_attendances, source: :attended_event
-
-  def upcoming_events
-    attended_events.select { |a_e| Time.now.utc < a_e.start_date_and_time.utc }
-  end
-
-  def past_events
-    attended_events.select { |a_e| Time.now.utc >= a_e.start_date_and_time.utc }
-  end
+  has_many :incoming_event_invitations, class_name: "EventInvitation", foreign_key: :recipient_id
+  has_many :outgoing_event_invitations, class_name: "EventInvitation", foreign_key: :sender_id
 end

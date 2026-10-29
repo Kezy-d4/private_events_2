@@ -2,7 +2,14 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: "User"
   has_many :event_attendances, foreign_key: :attended_event
   has_many :event_attendees, through: :event_attendances, source: :event_attendee
+  has_many :event_invitations
 
   scope :upcoming, -> { where(start_date_and_time: (Time.now.utc)..) }
   scope :past, -> { where(start_date_and_time: ..(Time.now.utc)) }
+  scope :private, -> { where(private: true) }
+  scope :public, -> { where(private: false) }
+
+  def attended_by_user?(user)
+    EventAttendance.where(attended_event_id: self.id, event_attendee_id: user.id).any?
+  end
 end
