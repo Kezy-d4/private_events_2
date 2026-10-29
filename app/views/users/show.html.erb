@@ -2,7 +2,7 @@
 
 <h3>Upcoming events</h3>
 <ul>
-  <% @user.upcoming_events.each do |u_e| %>
+  <% @user.attended_events.upcoming.each do |u_e| %>
     <li>
       <%= link_to "#{u_e.title} by #{u_e.creator.name}", event_path(u_e) %>
     </li>
@@ -11,7 +11,7 @@
 
 <h3>Past events</h3>
 <ul>
-  <% @user.past_events.each do |p_e| %>
+  <% @user.attended_events.past.each do |p_e| %>
     <li>
       <%= link_to "#{p_e.title} by #{p_e.creator.name}", event_path(p_e) %>
     </li>

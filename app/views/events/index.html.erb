@@ -1,8 +1,19 @@
 <h2>Browse events</h2>
+
+<h3>Upcoming events</h3>
 <ul>
-  <% @events.each do |event| %>
+  <% Event.upcoming.each do |u_e| %>
     <li>
-      <%= link_to "#{event.title} by #{event.creator.name}", event_path(event) %>
+      <%= link_to "#{u_e.title} by #{u_e.creator.name}", event_path(u_e) %>
+    </li>
+  <% end %>
+</ul>
+
+<h3>Past events</h3>
+<ul>
+  <% Event.past.each do |p_e| %>
+    <li>
+      <%= link_to "#{p_e.title} by #{p_e.creator.name}", event_path(p_e) %>
     </li>
   <% end %>
 </ul>
