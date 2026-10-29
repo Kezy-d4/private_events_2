@@ -22,6 +22,11 @@
   </p>  
 
   <p>
+    <%= form.checkbox :private, checked: true %>
+    <%= form.label :private, "Make private", checked_value: true, unchecked_value: false %>
+  </p>
+
+  <p>
     <%= form.submit %>
   </p>
 <% end %>
