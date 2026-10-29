@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_29_225253) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_29_232247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,7 +24,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_225253) do
   end
 
   create_table "event_invitations", force: :cascade do |t|
-    t.text "message"
     t.bigint "sender_id", null: false
     t.bigint "recipient_id", null: false
     t.bigint "event_id", null: false
