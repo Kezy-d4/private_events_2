@@ -9,7 +9,7 @@
     <%= form.hidden_field :event_attendee_id, value: current_user.id %>
   <% end %>
 
-  <% if user_signed_in? && EventAttendance.user_attending?(@event.id, current_user.id) %>
+  <% if user_signed_in? && @event.attended_by_user?(current_user) %>
     <%= form.submit "Attend event", disabled: true %>
   <% else %>
     <%= form.submit "Attend event" %>
