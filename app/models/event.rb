@@ -10,6 +10,14 @@ class Event < ApplicationRecord
   scope :public_visibility, -> { where(private: false) }
 
   def attended_by_user?(user)
-    EventAttendance.where(attended_event_id: self.id, event_attendee_id: user.id).any?
+    EventAttendance.where(attended_event_id: self.id, event_attendee_id: user).any?
+  end
+
+  def user_invited_to_attend?(user)
+    EventInvitation.where(event_id: self.id, recipient_id: user).any?
+  end
+
+  def involves_user?(user)
+    self.attended_by_user?(user) || self.user_invited_to_attend?(user)
   end
 end
