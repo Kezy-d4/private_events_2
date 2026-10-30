@@ -1,11 +1,7 @@
 class EventInvitationsController < ApplicationController
-  def index
-    @event_invitations = EventInvitation.all
-  end
-
   def create
     @event_invitation = EventInvitation.create(event_invitation_params)
-    redirect_to @event_invitation.sender
+    redirect_to @event_invitation.event
   end
 
   def destroy
