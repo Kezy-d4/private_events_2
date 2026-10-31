@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_29_232247) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_31_031925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -21,17 +21,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_232247) do
     t.datetime "updated_at", null: false
     t.index ["attended_event_id"], name: "index_event_attendances_on_attended_event_id"
     t.index ["event_attendee_id"], name: "index_event_attendances_on_event_attendee_id"
-  end
-
-  create_table "event_invitations", force: :cascade do |t|
-    t.bigint "sender_id", null: false
-    t.bigint "recipient_id", null: false
-    t.bigint "event_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_event_invitations_on_event_id"
-    t.index ["recipient_id"], name: "index_event_invitations_on_recipient_id"
-    t.index ["sender_id"], name: "index_event_invitations_on_sender_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -61,8 +50,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_232247) do
 
   add_foreign_key "event_attendances", "events", column: "attended_event_id"
   add_foreign_key "event_attendances", "users", column: "event_attendee_id"
-  add_foreign_key "event_invitations", "events"
-  add_foreign_key "event_invitations", "users", column: "recipient_id"
-  add_foreign_key "event_invitations", "users", column: "sender_id"
   add_foreign_key "events", "users", column: "creator_id"
 end
