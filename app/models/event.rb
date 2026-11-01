@@ -2,7 +2,6 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: "User"
   has_many :event_attendances, foreign_key: :attended_event
   has_many :event_attendees, through: :event_attendances, source: :event_attendee
-  has_many :event_invitations
 
   scope :upcoming, -> { where(start_date_and_time: (Time.now.utc)..) }
   scope :past, -> { where(start_date_and_time: ..(Time.now.utc)) }
@@ -11,13 +10,5 @@ class Event < ApplicationRecord
 
   def attended_by_user?(user)
     EventAttendance.where(attended_event_id: self.id, event_attendee_id: user).any?
-  end
-
-  def user_invited_to_attend?(user)
-    EventInvitation.where(event_id: self.id, recipient_id: user).any?
-  end
-
-  def involves_user?(user)
-    self.attended_by_user?(user) || self.user_invited_to_attend?(user)
   end
 end
