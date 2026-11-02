@@ -1,0 +1,16 @@
+<li>
+  <%= link_to e.title, event_path(e) %>
+  <% if user_signed_in? && e.attended_by_user?(current_user) %>
+    <p class="event-listing-tag">Attending</p>
+  <% end %>
+  <% if user_signed_in? && e.created_by_user?(current_user) %>
+    <p class="event-listing-tag">Created</p>
+  <% end %>
+
+  <ul>
+    <li>Creator: <%= link_to e.creator.name, user_path(e) %></li>
+    <li><%= "Location: #{e.location}" %></li>
+    <li><%= "Start date and time: #{e.start_date_and_time}" %></li>
+    <li><%= "Description: \n#{e.description[0, 60]}" %></li>
+  </ul>
+</li>
