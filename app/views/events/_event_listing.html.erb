@@ -1,14 +1,19 @@
 <li>
   <%= link_to e.title, event_path(e) %>
-  <% if user_signed_in? && e.attended_by_user?(current_user) %>
+  <% if user_signed_in? && e.attended_by_user?(current_user) && !e.created_by_user?(current_user) %>
     <p class="event-listing-tag">Attendee</p>
-  <% end %>
-  <% if user_signed_in? && e.created_by_user?(current_user) %>
+  <% elsif user_signed_in? && e.created_by_user?(current_user) %>
     <p class="event-listing-tag">Host</p>
   <% end %>
 
+  <% if user_signed_in? && e.private == true %>
+    <p class="event-listing-tag">Private</p>
+  <% elsif user_signed_in? && e.private == false %>
+    <p class="event-listing-tag">Public</p>
+  <% end %>
+
   <ul>
-    <li>Creator: <%= link_to e.creator.name, user_path(e.creator) %></li>
+    <li>Host: <%= link_to e.creator.name, user_path(e.creator) %></li>
     <li><%= "Location: #{e.location}" %></li>
     <li><%= "Start date and time: #{e.start_date_and_time}" %></li>
     <li><%= "Description: #{e.description[0, 60]}" %></li>
