@@ -16,6 +16,26 @@
   <% end %>
 <% end %>
 
+<% if user_signed_in? && @event.created_by_user?(current_user) %>
+  <h3>Invite users</h3>
+  <ul>
+    <% User.all_except(current_user).each do |u| %>
+      <li>
+        <p><%= u.name %></p>
+        <%= form_with url: event_attendances_path, scope: :event_attendance do |form| %>
+          <%= form.hidden_field :attended_event_id, value: @event.id %>
+          <%= form.hidden_field :event_attendee_id, value: u.id %>
+          <% if @event.attended_by_user?(u) %>
+            <%= form.submit "Invite user", disabled: true %>
+          <% else %>
+            <%= form.submit "Invite user" %>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
 <h3>Event attendees</h3>
 <ul>
   <% @event.event_attendees.each do |event_attendee| %>
