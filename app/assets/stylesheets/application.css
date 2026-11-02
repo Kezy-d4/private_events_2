@@ -9,14 +9,49 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
- /* * {
+ body {
   margin: 0;
- } */
+ }
+
+ .main-wrapper {
+  padding: 0px 10px;
+ }
 
  header {
   border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & .header-nav-and-greeting {
+    display: flex;
+  }
+
+  & nav > ul {
+    display: flex;
+    gap: 12px;
+    list-style: none;
+    padding: 0px;
+  }
+
+  & .user-account-nav, .site-nav {
+    padding-left: 20px;
+  }
+
+  & .site-nav, .greeting {
+    border-right: 1px solid black;
+    padding-right: 20px;
+  }
  }
 
  footer {
   border-top: 1px solid black;
+ }
+
+ .notice {
+  color: green;
+ }
+
+ .alert {
+  color: red;
  }
