@@ -11,4 +11,12 @@ class Event < ApplicationRecord
   def attended_by_user?(user)
     EventAttendance.where(attended_event_id: self.id, event_attendee_id: user).any?
   end
+
+  def created_by_user?(user)
+    self.creator == user
+  end
+
+  def involves_user?(user)
+    created_by_user?(user) || attended_by_user?(user)
+  end
 end
