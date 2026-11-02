@@ -26,33 +26,43 @@
   <body>
     <div class="main-wrapper">
       <header>
-        <div class="heading-and-tagline">
-          <h1>Private Events</h1>
-          <p>Event management made simple</p>
+        <div class="main-heading-and-greeting">
+          <div class="main-heading">
+            <h1>Private Events</h1>
+            <p>Event management made simple</p>
+          </div>
+  
+          <% if user_signed_in? %>
+            <div class="greeting">
+              <p><%= "Hello, #{current_user.name}" %></p>
+            </div>
+          <% end %>
         </div>
 
-        <nav class="site-nav">
-          <ul>
-            <li><%= link_to "Browse events", root_path %></li>
-            <li><%= link_to "Host an event", new_event_path %></li>
-            <% if user_signed_in? %>
-              <li><%= link_to "My events", user_path(current_user.id) %></li>
-            <% end %>        
-          </ul>
-        </nav>
+        <div class="header-nav">
+          <nav class="site-nav">
+            <ul>
+              <li><%= link_to "Browse events", root_path %></li>
+              <li><%= link_to "Host an event", new_event_path %></li>
+              <% if user_signed_in? %>
+                <li><%= link_to "My events", user_path(current_user.id) %></li>
+              <% end %>        
+            </ul>
+          </nav>
 
-        <nav class="user-account-nav">
-          <ul>
-            <% if user_signed_in? %>
-              <li>
-                <%= link_to("Log out", destroy_user_session_path, data: { turbo_method: :delete }) %>
-              </li>
-            <% else %>
-              <li><%= link_to "Log in", new_user_session_path %></li>
-              <li><%= link_to "Sign up", new_user_registration_path %></li>
-            <% end %>
-          </ul>
-        </nav>
+          <nav class="user-account-nav">
+            <ul>
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %>
+                </li>
+              <% else %>
+                <li><%= link_to "Log in", new_user_session_path %></li>
+                <li><%= link_to "Sign up", new_user_registration_path %></li>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
       </header>
 
       <main>
