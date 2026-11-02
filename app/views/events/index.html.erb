@@ -1,27 +1,35 @@
 <h2>Browse events</h2>
 
 <h3>Upcoming events</h3>
+<h4>Private</h4>
 <ul>
-  <% Event.public_visibility.upcoming.each do |e| %>
-    <%= render partial: "event_listing", locals: { e: e } %>
-  <% end %>
-
-  <% Event.private_visibility.upcoming.each do |e| %>
-    <% if user_signed_in? && e.involves_user?(current_user) %>
-      <%= render partial: "event_listing", locals: { e: e } %>
+  <% Event.private_visibility.upcoming.each do |event| %>
+    <% if event.attended_by_user?(current_user) %>
+      <%= render partial: "event_listing", locals: { event: event } %>
     <% end %>
   <% end %>
 </ul>
 
-<h3>Past events</h3>
+<h4>Public</h4>
 <ul>
-  <% Event.public_visibility.past.each do |e| %>
-    <%= render partial: "event_listing", locals: { e: e } %>
+  <% Event.public_visibility.upcoming.each do |event| %>
+    <%= render partial: "event_listing", locals: { event: event } %>
   <% end %>
+</ul>
 
-  <% Event.private_visibility.past.each do |e| %>
-    <% if user_signed_in? && e.involves_user?(current_user) %>
-      <%= render partial: "event_listing", locals: { e: e } %>
+<h3>Past events</h3>
+<h4>Private</h4>
+<ul>
+  <% Event.private_visibility.past.each do |event| %>
+    <% if event.attended_by_user?(current_user) %>
+      <%= render partial: "event_listing", locals: { event: event } %>
     <% end %>
+  <% end %>  
+</ul>
+
+<h4>Public</h4>
+<ul>
+  <% Event.public_visibility.past.each do |event| %>
+    <%= render partial: "event_listing", locals: { event: event } %>
   <% end %>
 </ul>
