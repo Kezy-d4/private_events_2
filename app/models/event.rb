@@ -8,6 +8,11 @@ class Event < ApplicationRecord
   scope :private_visibility, -> { where(private: true) }
   scope :public_visibility, -> { where(private: false) }
 
+  validates :title, :description, :location, :start_date_and_time, :private, presence: true
+  validates :title, length: { maximum: 100 }
+  validates :description, length: { maximum: 500 }
+  validates :location, length: { maximum: 100 }
+
   def attended_by_user?(user)
     EventAttendance.where(attended_event_id: self.id, event_attendee_id: user).any?
   end

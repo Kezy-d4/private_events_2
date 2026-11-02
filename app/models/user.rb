@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :attended_events, through: :event_attendances, source: :attended_event
 
   scope :all_except, ->(user) { where("id != ?", user.id) }
+
+  validates :name, :email, :encrypted_password, presence: true
+  validates :name, length: { in: 2..28 }, uniqueness: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
 end
