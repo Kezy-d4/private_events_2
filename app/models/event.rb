@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   scope :private_visibility, -> { where(private: true) }
   scope :public_visibility, -> { where(private: false) }
 
-  validates :title, :description, :location, :start_date_and_time, :private, presence: true
+  validates :title, :description, :location, :start_date_and_time, presence: true
   validates :title, length: { maximum: 100 }
   validates :description, length: { maximum: 500 }
   validates :location, length: { maximum: 100 }
