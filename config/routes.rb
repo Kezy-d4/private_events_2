@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  resources :events, only: [ :index, :show, :new, :create, :edit, :update ]
+  resources :events
   resources :users, only: [ :show ]
   resources :event_attendances, only: [ :create, :destroy ]
 

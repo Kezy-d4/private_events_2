@@ -7,6 +7,16 @@
   <ul>
     <% if @event.created_by_user?(current_user) %>
       <li><%= link_to "Edit event", edit_event_path(@event) %></li>
+      <li>
+        <%=
+          button_to(
+            "Delete event",
+             event_path(@event), 
+             method: :delete,
+             data: { turbo_confirm: "Are you sure?" } 
+          )
+        %>
+      </li>
     <% end %>
 
     <% unless @event.created_by_user?(current_user) %>
