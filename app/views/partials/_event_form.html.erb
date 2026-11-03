@@ -1,0 +1,39 @@
+<%= form_with model: @event, class: "event-form" do |form| %>
+  <% if @event.errors.any? %>
+    <h2><%= @event.errors.size %> errors prevented this event from being saved:</h2>
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
+  <p class="form-control">
+    <%= form.label :title %>
+    <%= form.text_field :title, autofocus: true %>
+  </p>
+
+  <p class="form-control">
+    <%= form.label :start_date_and_time %>
+    <%= form.datetime_local_field :start_date_and_time %>
+  </p>  
+
+  <p class="form-control">
+    <%= form.label :location %>
+    <%= form.text_field :location %>
+  </p>
+
+  <p class="form-control">
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 5 %>
+  </p>  
+
+  <p class="form-control">
+    <%= form.checkbox :private, checked: true %>
+    <%= form.label :private, "Make private", checked_value: true, unchecked_value: false %>
+  </p>
+
+  <p class="form-control">
+    <%= form.submit %>
+  </p>
+<% end %>

@@ -1,14 +1,25 @@
 <%# TITLE %>
 <h2><%= @event.title %> hosted by <%= @event.creator.name %></h2>
 
-<%# ATTEND EVENT BUTTON %>
+<%# EVENT MANAGEMENT %>
 <section>
-  <%=
-    render(
-      partial: "partials/event_attendance_form", 
-      locals: { event: @event, user: current_user }
-    )
-  %>
+  <h3>Manage</h3>
+  <ul>
+    <% if @event.created_by_user?(current_user) %>
+      <li><%= link_to "Edit event", edit_event_path(@event) %></li>
+    <% end %>
+
+    <% unless @event.created_by_user?(current_user) %>
+      <li>
+        <%=
+          render(
+            partial: "partials/event_attendance_form", 
+            locals: { event: @event, user: current_user }
+          )
+        %>
+      </li>
+    <% end %>
+  </ul>
 </section>
 
 <%# TAGS %>
