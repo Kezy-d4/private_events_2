@@ -5,7 +5,7 @@
 <ul>
   <% Event.private_visibility.upcoming.each do |event| %>
     <% if event.attended_by_user?(current_user) %>
-      <%= render partial: "event_listing", locals: { event: event } %>
+      <%= render partial: "partials/event_listing", locals: { event: event } %>
     <% end %>
   <% end %>
 </ul>
@@ -13,7 +13,7 @@
 <h4>Public</h4>
 <ul>
   <% Event.public_visibility.upcoming.each do |event| %>
-    <%= render partial: "event_listing", locals: { event: event } %>
+    <%= render partial: "partials/event_listing", locals: { event: event } %>
   <% end %>
 </ul>
 
@@ -22,7 +22,7 @@
 <ul>
   <% Event.private_visibility.past.each do |event| %>
     <% if event.attended_by_user?(current_user) %>
-      <%= render partial: "event_listing", locals: { event: event } %>
+      <%= render partial: "partials/event_listing", locals: { event: event } %>
     <% end %>
   <% end %>  
 </ul>
@@ -30,6 +30,6 @@
 <h4>Public</h4>
 <ul>
   <% Event.public_visibility.past.each do |event| %>
-    <%= render partial: "event_listing", locals: { event: event } %>
+    <%= render partial: "partials/event_listing", locals: { event: event } %>
   <% end %>
 </ul>

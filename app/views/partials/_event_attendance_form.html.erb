@@ -1,4 +1,4 @@
-<% form_with url: event_attendances_path, scope: :event_attendance do |form| %>
+<%= form_with url: event_attendances_path, scope: :event_attendance do |form| %>
   <%= form.hidden_field :event_attendee_id, value: user.id %>
   <%= form.hidden_field :attended_event_id, value: event.id %>
 

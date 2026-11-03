@@ -1,6 +1,16 @@
 <%# TITLE %>
 <h2><%= @event.title %> hosted by <%= @event.creator.name %></h2>
 
+<%# ATTEND EVENT BUTTON %>
+<section>
+  <%=
+    render(
+      partial: "partials/event_attendance_form",
+      locals: { event: @event, user: current_user, button_text: "Attend event" }
+    )
+  %>
+</section>
+
 <%# TAGS %>
 <section>
   <h3>Tags</h3>
@@ -17,16 +27,6 @@
       <li>Public</li>
     <% end %>
   </ul>
-</section>
-
-<%# ATTEND EVENT BUTTON %>
-<section>
-  <%=
-    render(
-      partial: "partials/event_attendance_form",
-      locals: { event: @event, user: current_user, button_text: "Attend event" }
-    )
-  %>
 </section>
 
 <%# EVENT ATTENDEES %>
