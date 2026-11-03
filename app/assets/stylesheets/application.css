@@ -48,14 +48,6 @@
   border-top: 1px solid black;
  }
 
- .notice {
-  color: green;
- }
-
- .alert {
-  color: red;
- }
-
  .new-event-form .form-control {
   display: flex;
   flex-direction: column;;
