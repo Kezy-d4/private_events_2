@@ -1,46 +1,73 @@
-<h2>
-  <%= @event.title %>
-</h2>
+<%# TITLE %>
+<h2><%= @event.title %> hosted by <%= @event.creator.name %></h2>
 
-<%= form_with url: event_attendances_path, scope: :event_attendance do |form| %>
-  <%= form.hidden_field :attended_event_id, value: @event.id %>
-
-  <% if user_signed_in? %>
-    <%= form.hidden_field :event_attendee_id, value: current_user.id %>
-  <% end %>
-
-  <% if user_signed_in? && @event.attended_by_user?(current_user) %>
-    <%= form.submit "Attend event", disabled: true %>
-  <% else %>
-    <%= form.submit "Attend event" %>
-  <% end %>
-<% end %>
-
-<% if user_signed_in? && @event.created_by_user?(current_user) %>
-  <h3>Invite users</h3>
+<%# TAGS %>
+<section>
+  <h3>Tags</h3>
   <ul>
-    <% User.all_except(current_user).each do |u| %>
-      <li>
-        <p><%= u.name %></p>
-        <%= form_with url: event_attendances_path, scope: :event_attendance do |form| %>
-          <%= form.hidden_field :attended_event_id, value: @event.id %>
-          <%= form.hidden_field :event_attendee_id, value: u.id %>
-          <% if @event.attended_by_user?(u) %>
-            <%= form.submit "Invite user", disabled: true %>
-          <% else %>
-            <%= form.submit "Invite user" %>
-          <% end %>
-        <% end %>
-      </li>
+    <% if @event.created_by_user?(current_user) %>
+      <li>Host</li>
+    <% elsif @event.attended_by_user?(current_user) %>
+      <li>Attendee</li>
+    <% end %>
+
+    <% if @event.private %>
+      <li>Private</li>
+    <% else %>
+      <li>Public</li>
     <% end %>
   </ul>
+</section>
+
+<%# ATTEND EVENT BUTTON %>
+<section>
+  <%=
+    render(
+      partial: "partials/event_attendance_form",
+      locals: { event: @event, user: current_user, button_text: "Attend event" }
+    )
+  %>
+</section>
+
+<%# EVENT ATTENDEES %>
+<section>
+  <h3>Event attendees</h3>
+  <ul>
+    <% @event.event_attendees.each do |event_attendee| %>
+      <li><%= event_attendee.name %></li>
+    <% end %>
+  </ul>
+</section>
+
+<%# INVITE USERS %>
+<% if @event.created_by_user?(current_user) %>
+  <section>
+    <h3>Invite users</h3>
+    <ul>
+      <% User.all_except(current_user).each do |user| %>
+        <li>
+          <p>
+            <p><%= user.name %></p>
+            <%=
+              render(
+                partial: "partials/event_attendance_form",
+                locals: { event: @event, user: user, button_text: "Invite user" }
+              )
+            %>
+          </p>
+        </li>
+      <% end %>
+    </ul>
+  </section>
 <% end %>
 
-<h3>Event attendees</h3>
-<ul>
-  <% @event.event_attendees.each do |event_attendee| %>
-    <li><%= link_to event_attendee.name, user_path(event_attendee) %></li>
-  <% end %>
-</ul>
-
-<%= debug @event %>
+<%# EVENT INFO %>
+<section>
+  <h3>Details</h3>
+  <ul>
+    <li><%= "Host: #{@event.creator.name}" %></li>
+    <li><%= "Location: #{@event.location}" %></li>
+    <li><%= "Start date and time: #{@event.start_date_and_time}" %></li>
+    <li><%= "Description: #{@event.description}" %></li>
+  </ul>
+</section>
