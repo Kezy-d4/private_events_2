@@ -5,8 +5,8 @@
 <section>
   <%=
     render(
-      partial: "partials/event_attendance_form",
-      locals: { event: @event, user: current_user, button_text: "Attend event" }
+      partial: "partials/event_attendance_form", 
+      locals: { event: @event, user: current_user }
     )
   %>
 </section>
@@ -45,17 +45,19 @@
     <h3>Invite users</h3>
     <ul>
       <% User.all_except(current_user).each do |user| %>
-        <li>
-          <p>
-            <p><%= user.name %></p>
-            <%=
-              render(
-                partial: "partials/event_attendance_form",
-                locals: { event: @event, user: user, button_text: "Invite user" }
-              )
-            %>
-          </p>
-        </li>
+        <% unless @event.attended_by_user?(user) %>
+          <li>
+            <p>
+              <p><%= user.name %></p>
+              <%=
+                render(
+                  partial: "partials/event_invitation_form",
+                  locals: { event: @event, user: user }
+                )
+              %>
+            </p>
+          </li>
+        <% end %>
       <% end %>
     </ul>
   </section>
